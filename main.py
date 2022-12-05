@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 
+# Top left diagonal is even squares
+# Bottom right diagonal is odd squares -1
+#
+
 N_SEQUENCES = 10
 
 value = 1
