@@ -37,7 +37,6 @@ def decode(n) -> [int, int]:
     main_term = 4 * radius ** 2
 
     if n <= main_term - 2 * radius:
-        # From top right corner
         difference = (main_term - 2 * radius) - n
         return (radius, radius - difference)
     elif n <= main_term:
@@ -49,3 +48,5 @@ def decode(n) -> [int, int]:
     elif n <= main_term + 4 * radius:
         difference = (main_term + 4 * radius) - n
         return (radius - difference, -radius)
+    else:
+        raise IndexError(f"{n} is out of range!")
