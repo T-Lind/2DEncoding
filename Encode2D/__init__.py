@@ -3,9 +3,30 @@ length = 1
 value = 1
 
 
-def encode(x, y) -> int:
-    # global relative_x, relative_y
-    pass
+def add_series():
+    global relative_x, relative_y, length, value
+    for _ in range(length):
+        relative_x.append(value)
+    for _ in range(length):
+        relative_x.append(0)
+    for _ in range(length):
+        relative_y.append(0)
+    for _ in range(length):
+        relative_y.append(value)
+
+    value *= -1
+    length += 1
+
+
+def slow_encode(x, y) -> int:
+    maximum = max(abs(x), abs(y))
+    min_term = 4 * maximum ** 2 - 4 * maximum
+    max_term = 4 * maximum ** 2 + 6 * maximum
+    for n in range(min_term, max_term + 1):
+        extrapolated = decode(n)
+        if extrapolated == (x, y):
+            return n
+    raise IndexError("No suitable n found!")
 
 
 def slow_decode(n) -> [int, int]:
@@ -44,7 +65,7 @@ def decode(n) -> [int, int]:
         return (radius - difference, radius)
     elif n <= main_term + 2 * radius:
         difference = (main_term + 2 * radius) - n
-        return (-radius, -(radius + difference-4))
+        return (-radius, -(radius - difference))
     elif n <= main_term + 4 * radius:
         difference = (main_term + 4 * radius) - n
         return (radius - difference, -radius)
