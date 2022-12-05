@@ -18,6 +18,25 @@ def add_series():
     length += 1
 
 
+def encode(x, y) -> int:
+    if x == y == 0:
+        return 0
+
+    maximum = max(abs(x), abs(y))
+    min_term = 4 * maximum ** 2 - 4 * maximum
+    max_term = 4 * maximum ** 2 + 6 * maximum
+    print(min_term, max_term, x, y)
+    if x < 0 and y > 0:
+        return min_term + abs(x) * ((max_term - min_term) / (abs(x) * 2)) - y
+    elif x > 0 and y > 0:
+        return min_term + x * ((max_term - min_term) / (x * 2)) - y - (x + y)
+    elif x > 0 and y < 0:
+        return min_term + x * ((max_term - min_term) / (x * 2)) - y + x + abs(y)
+    elif x < 0 and y < 0:  # TODO: Fix
+        return min_term + abs(x) * ((max_term - min_term) / (abs(x) * 2)) - y
+
+
+
 def slow_encode(x, y) -> int:
     maximum = max(abs(x), abs(y))
     min_term = 4 * maximum ** 2 - 4 * maximum
