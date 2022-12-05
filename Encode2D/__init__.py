@@ -31,22 +31,21 @@ def slow_decode(n) -> [int, int]:
 
 def decode(n) -> [int, int]:
     radius = 0
-    while 4 * radius ** 2 < n:
+    while 4 * radius ** 2 + 4 * radius < n:
         radius += 1
-    radius -= 1
 
     main_term = 4 * radius ** 2
 
-    if n < main_term - 2*radius:
-        value = 4
+    if n <= main_term - 2 * radius:
         # From top right corner
-        pass
-    elif n < main_term:
-        # From top left corner
-        pass
-    elif n < main_term + 2*radius:
-        # From bottom left corner
-        pass
-    else:
-        # From bottom right corner
-        pass
+        difference = (main_term - 2 * radius) - n
+        return (radius, radius - difference)
+    elif n <= main_term:
+        difference = n - (main_term - 2 * radius)
+        return (radius - difference, radius)
+    elif n <= main_term + 2 * radius:
+        difference = (main_term + 2 * radius) - n
+        return (-radius, -(radius + difference-4))
+    elif n <= main_term + 4 * radius:
+        difference = (main_term + 4 * radius) - n
+        return (radius - difference, -radius)
