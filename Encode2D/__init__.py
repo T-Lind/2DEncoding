@@ -2,7 +2,7 @@ def encode(x, y) -> int:
     maximum = max(abs(x), abs(y))
     main_term = 4 * maximum ** 2
     if x < 0 < y:
-        return main_term + maximum - 2 * y + abs(x)
+        return main_term + maximum - 2 * y - x
     elif x > 0 and y > 0:
         return main_term - x + maximum - 2 * y
     elif x > 0 > y:
